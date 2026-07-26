@@ -60,7 +60,7 @@ export default function AdminContactPage() {
       setLoading(true);
 
       await axios.put(
-        `${API_URL}/contact`,
+        `${API_URL}/api/contact`,
         formData,
         {
           headers: {
