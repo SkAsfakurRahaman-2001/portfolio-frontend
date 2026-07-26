@@ -27,7 +27,7 @@ export default function AdminContactPage() {
 
   const fetchContact = async () => {
     try {
-      const res = await axios.get(`${API_URL}/contact`);
+      const res = await axios.get(`${API_URL}/api/contact`);
 
       const data = res.data.data;
 
