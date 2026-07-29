@@ -32,9 +32,15 @@ export default function BlogDetailsPage() {
     try {
       const res = await api.get("/api/blogs");
 
-      const foundBlog = res.data.data.find(
-        (item: Blog) => item.slug === slug
-      );
+      const decodedSlug = decodeURIComponent(String(slug))
+        .trim()
+        .toLowerCase();
+
+      const foundBlog = res.data.data.find((item: Blog) => {
+        return (
+          item.slug.trim().toLowerCase() === decodedSlug
+        );
+      });
 
       setBlog(foundBlog || null);
     } catch (error) {
@@ -67,7 +73,6 @@ export default function BlogDetailsPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-black py-4 text-white sm:py-6">
       <section className="mx-auto max-w-2xl px-3 sm:px-4">
-
         {/* Image */}
         <img
           src={imageUrl}
@@ -106,7 +111,6 @@ export default function BlogDetailsPage() {
           <FiArrowLeft size={18} />
           Back to Blogs
         </button>
-
       </section>
     </main>
   );

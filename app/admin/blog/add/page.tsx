@@ -4,9 +4,18 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { api } from "@/lib/api";
 
+const generateSlug = (text: string) => {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\./g, "") // Remove dots
+    .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/-+/g, "-"); // Remove duplicate -
+};
+
 export default function AddBlogPage() {
   const [loading, setLoading] = useState(false);
-
   const [image, setImage] = useState<File | null>(null);
 
   const [formData, setFormData] = useState({
@@ -22,10 +31,20 @@ export default function AddBlogPage() {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+
+    if (name === "title") {
+      setFormData((prev) => ({
+        ...prev,
+        title: value,
+        slug: generateSlug(value),
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleImage = (
@@ -93,10 +112,7 @@ export default function AddBlogPage() {
           Add Blog
         </h1>
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-1"
-        >
+        <form onSubmit={handleSubmit} className="space-y-1">
           <div>
             <label className="mb-1 block text-xs font-semibold sm:text-sm">
               Blog Title
@@ -138,10 +154,8 @@ export default function AddBlogPage() {
               type="text"
               name="slug"
               value={formData.slug}
-              onChange={handleChange}
-              placeholder="getting-started-with-nextjs"
-              className="w-full rounded-lg border p-2 text-sm"
-              required
+              readOnly
+              className="w-full rounded-lg border bg-gray-100 p-2 text-sm text-gray-600"
             />
           </div>
 
@@ -185,13 +199,8 @@ export default function AddBlogPage() {
               onChange={handleChange}
               className="w-full rounded-lg border p-2 text-sm"
             >
-              <option value="Published">
-                Published
-              </option>
-
-              <option value="Draft">
-                Draft
-              </option>
+              <option value="Published">Published</option>
+              <option value="Draft">Draft</option>
             </select>
           </div>
 
