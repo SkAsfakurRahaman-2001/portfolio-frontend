@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL("https://sk-asfakur-portfolio.vercel.app/"),
 
   title: "Sk Asfakur Rahaman | Full Stack Developer",
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: "Sk Asfakur Rahaman | Full Stack Developer",
     description:
       "Full Stack Developer building modern web applications with React, Next.js and Node.js.",
-    url: "https://yourdomain.com",
+    url: "https://sk-asfakur-portfolio.vercel.app/",
     siteName: "Sk Asfakur Rahaman Portfolio",
     images: [
       {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://yourdomain.com",
+    canonical: "https://sk-asfakur-portfolio.vercel.app/",
   },
 };
 
@@ -71,7 +71,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Sk Asfakur Rahaman",
               jobTitle: "Full Stack Developer",
-              url: "https://yourdomain.com",
+              url: "https://sk-asfakur-portfolio.vercel.app/",
             }),
           }}
         />
